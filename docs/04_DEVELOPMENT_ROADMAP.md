@@ -26,8 +26,7 @@ git --version
 
 ### 0.2 — Project Structure Init
 ```bash
-mkdir mnemo && cd mnemo
-git init
+mkdir tethercd tether init
 echo "venv/\n.env\n__pycache__/\n*.pyc\nnode_modules/\ndist/" > .gitignore
 
 # Backend scaffold
@@ -124,7 +123,7 @@ FLASK_ENV=development
 SECRET_KEY=generate-a-random-string-here
 JWT_SECRET_KEY=another-random-string-here
 ENCRYPTION_KEY=generate-32-byte-hex-here
-DATABASE_URL=sqlite:///mnemo_dev.db
+DATABASE_URL=sqlite:///tether.db
 FRONTEND_URL=http://localhost:5173
 ```
 
@@ -361,13 +360,13 @@ curl -sSfL https://get.tur.so/install.sh | bash
 turso auth login
 
 # Create database
-turso db create mnemo-prod
+turso db create tetherd
 
 # Get connection URL
-turso db show mnemo-prod --url
+turso db show tetherd --url
 
 # Get auth token
-turso db tokens create mnemo-prod
+turso db tokens create tetherd
 ```
 
 ### 5.2 — Install Turso SQLAlchemy Driver
@@ -403,7 +402,7 @@ flask db upgrade
 ```yaml
 services:
   - type: web
-    name: mnemo-backend
+    name: tetherkend
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn run:app
@@ -416,13 +415,13 @@ services:
         sync: false  # Set manually
 
   - type: web
-    name: mnemo-frontend
+    name: tetherntend
     env: static
     buildCommand: npm run build
     staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
-        value: https://mnemo-backend.onrender.com
+        value: https://tetherkend.onrender.com
 ```
 
 ### 5.5 — CORS Configuration
